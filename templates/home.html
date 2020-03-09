@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Turn_The_Tables</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/homestyle.css') }}" rel="stylesheet" />
+  <!--Jquery-->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <nav>
+    <div class="main">
+      <div class="left">
+        <span><a href="{{ url_for('landing') }}"><span id="title">Turn-the-Tables</span></a></span>
+      </div>
+      <div class="right">
+
+        <div id="menu-bar">
+          <div id="menu" onclick="onClickMenu()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+          </div>
+          <ul class="nav" id="nav">
+            <li><a onClick="{{ url_for('landing') }}">How It Works?</a></li>
+            <li><a onClick="{{ url_for('landing') }}">Contact Us</a></li>
+
+        </div>
+        <div class="menu-bg" id="menu-bg"></div>
+        </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="centerpage">
+      <div><span class="sectionHeader">Make Life Easier.</span></div>
+      <div class="animation"><img src="{{ url_for('static', filename='images/float-illustration.gif') }}" alt="img">
+      </div>
+      <div class="buttons">
+        <form id="uploadform" method="POST" enctype="multipart/form-data" action="">
+
+          <div>
+            <input type="file" name="photo" id="upform" accept="image/*" hidden="hidden" />
+            <button type="button" id="custom-button">CHOOSE AN IMAGE</button>
+            <span id="custom-text">No file chosen, yet.</span>
+          </div>
+
+          <input type="button" id="file_button" class="myButton myButton:hover myButton:active" value="Submit">
+
+        </form>
+      </div>
+    </div>
+
+
+    <div id="result">
+      <h3>RESULTS</h3>
+      <img class="loadAnim" src="{{ url_for('static', filename='images/Spin-1s-200px.svg') }}" alt="svg">
+      <div id="table">
+        <!-- table will come here -->
+
+      </div>
+      <div class="buttons">
+
+        <a href="{{ url_for('.downloadX') }}">
+          <button id="xlsx" class="myButton myButton:hover myButton:active">Download <span
+              id="xlsx">xlsx</span></button>
+        </a>
+        <a href="{{ url_for('.downloadC') }}">
+          <button id="csv" class="myButton myButton:hover myButton:active">Download csv</button>
+        </a>
+
+
+
+      </div>
+
+
+    </div>
+
+    <div id="last">
+
+      <!-- animation -->
+      <img id="call" src="{{ url_for('static', filename='images/contact-us.gif') }}">
+      <p>
+        ravi maurya <br>
+        kush kothari <br>
+        shreyas penkar <br>
+        nikheel indanoor<br>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    function onClickMenu() {
+      document.getElementById("menu").classList.toggle("change");
+      document.getElementById("nav").classList.toggle("change");
+
+      document.getElementById("menu-bg").classList.toggle("change-bg");
+    }
+  </script>
+
+  <script>
+    const realFileBtn = document.getElementById("upform");
+    const customBtn = document.getElementById("custom-button");
+    const customTxt = document.getElementById("custom-text");
+
+    customBtn.addEventListener("click", function () {
+      realFileBtn.click();
+    });
+
+    realFileBtn.addEventListener("change", function () {
+      if (realFileBtn.value) {
+        customTxt.innerHTML = realFileBtn.value.match(
+          /[\/\\]([\w\d\s\.\-\(\)]+)$/
+        )[1];
+      } else {
+        customTxt.innerHTML = "No file chosen, yet.";
+      }
+    });
+
+  </script>
+
+  <script>
+    $(".loadAnim").css("display", "none");
+    let jsObj;
+    $(function () {
+      $('#file_button').click(function () {
+        $(".loadAnim").css("display", "block");
+        var form_data = new FormData($('#uploadform')[0]);
+        var elmnt = document.getElementById("result");
+        elmnt.scrollIntoView();
+        $.ajax({
+          type: 'POST',
+          url: '/process',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function (data) {
+            jsObj = JSON.parse(data)
+            console.log(jsObj)
+
+            // Task 1 : Loop thr 
+            var rowsL = Object.keys(jsObj);
+            var colsL = Object.keys(jsObj[0]);
+            let table = document.createElement("table")
+            let tr = table.insertRow(-1)
+            for (var i = 0; i < rowsL.length; i++) {
+              var th = document.createElement("th");      // TABLE HEADER.
+              th.innerHTML = jsObj[i][0];
+              tr.appendChild(th);
+            }
+
+            // ADD JSON DATA TO THE TABLE AS ROWS.
+            for (var j = 1; j < colsL.length; j++) {
+              tr = table.insertRow(-1);
+
+              for (var i = 0; i < rowsL.length; i++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = jsObj[i][j];
+              }
+            }
+            $(".loadAnim").css("display", "none");
+            // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+            var divContainer = document.getElementById("table");
+            divContainer.innerHTML = "";
+            divContainer.appendChild(table);
+            $('table').css('border-collapse', 'collapse');
+            $('table').css('margin', '25px 0');
+            $('table').css('font-size', '0.9em');
+            $('table').css('min-width', '400px');
+            $('table').css('border-radius', '5px 5px 0 0');
+            $('table').css('overflow', 'hidden');
+
+            $('table th').css('background-color', 'green');
+            $('table th').css('color', 'white');
+            $('table th').css('text-align', 'left');
+            $('table th').css('font-weight', 'bold');
+
+            $('table th').css('padding', '12px 15px');
+            $('table td').css('padding', '12px 15px');
+
+            $('table tr').css('border-bottom', '1px solid #dddddd');
+            $('table tr:last-of-type').css('border-bottom', '2px solid green');
+          },
+        })
+      })
+    })
+  </script>
+</body>
+
+</html>

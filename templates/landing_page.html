@@ -1,0 +1,108 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width , initial-scale=1.0">
+  <title>Turn-The-Tables</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landingpagestyle.css') }}">
+</head>
+
+<body>
+  <nav>
+    <div class="main">
+      <div class="left">
+        <span><a href="{{ url_for('landing') }}"><span id="title">Turn-the-Tables</span></a></span>
+      </div>
+      <div class="right">
+
+        <div id="menu-bar">
+          <div id="menu" onclick="onClickMenu()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+          </div>
+          <ul class="nav" id="nav">
+            <li><a onClick="document.getElementById('middle').scrollIntoView();">How It Works?</a></li>
+            <li><a onClick="document.getElementById('last').scrollIntoView();">Contact Us</a></li>
+
+        </div>
+        <div class="menu-bg" id="menu-bg"></div>
+        </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="center">
+    <div class="info">
+      <span class="align">Make Life Easier</span>
+      <p>
+        Extract Tables from Images Easily.
+      </p>
+      <a href="{{ url_for('home') }}">
+        <button type="button" class="myButton myButton:hover myButton:active">Try Now</button>
+      </a>
+    </div>
+
+    <div class="image"><img id="illImage" src="{{ url_for('static', filename='images/manIllustration.png') }}"
+        alt="img"></div>
+  </main>
+
+
+  <div id="middle">
+    <span class="sectionHeader">How It Works?</span>
+
+    <div class="works-section">
+
+      <div class="work work1">
+        <img src="{{ url_for('static', filename='images/borders.png') }}" alt="">
+        <span>Detect Borders</span>
+      </div>
+      <div class="work work2">
+        <img src="{{ url_for('static', filename='images/ocr.png') }}" alt="">
+        <span>Detect Text</span>
+      </div>
+      <div class="work work3">
+        <img src="{{ url_for('static', filename='images/excel.png') }}" alt="">
+        <span>Export the Table</span>
+      </div>
+
+    </div>
+
+
+    <!-- <img src="{{ url_for('static', filename='images/digital-marketing.gif') }}">
+    <p>
+      
+    </p> -->
+  </div>
+
+  <div id="last">
+
+    <!-- animation -->
+    <img id="call" src="{{ url_for('static', filename='images/contact-us.gif') }}">
+    <div>
+      <p>
+        ravi maurya <br>
+        kush kothari <br>
+        shreyas penkar <br>
+        nikheel indanoor<br>
+      </p>
+    </div>
+
+  </div>
+  </main>
+
+
+
+  <script>
+    function onClickMenu() {
+      document.getElementById("menu").classList.toggle("change");
+      document.getElementById("nav").classList.toggle("change");
+      document.getElementById("menu-bg").classList.toggle("change-bg");
+    }
+  </script>
+</body>
+
+</html>
