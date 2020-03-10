@@ -9,30 +9,16 @@
 </head>
 
 <body>
+
   <nav>
-    <div class="main">
-      <div class="left">
-        <span><a href="{{ url_for('landing') }}"><span id="title">Turn-the-Tables</span></a></span>
-      </div>
-      <div class="right">
-
-        <div id="menu-bar">
-          <div id="menu" onclick="onClickMenu()">
-            <div id="bar1" class="bar"></div>
-            <div id="bar2" class="bar"></div>
-            <div id="bar3" class="bar"></div>
-          </div>
-          <ul class="nav" id="nav">
-            <li><a onClick="document.getElementById('middle').scrollIntoView();">How It Works?</a></li>
-            <li><a onClick="document.getElementById('last').scrollIntoView();">Contact Us</a></li>
-
-        </div>
-        <div class="menu-bg" id="menu-bg"></div>
-        </li>
-
-        </ul>
-      </div>
+    <div class="logo">
+      <span id="title"><a href="{{ url_for('landing') }}">Turn-the-Tables</a></span>
     </div>
+
+    <ul class="nav-links">
+      <li><a onClick="document.getElementById('middle').scrollIntoView();">How It Works?</a></li>
+      <li><a onClick="document.getElementById('last').scrollIntoView();">Contact Us</a></li>
+    </ul>
   </nav>
 
   <main class="center">
@@ -53,9 +39,7 @@
 
   <div id="middle">
     <span class="sectionHeader">How It Works?</span>
-
     <div class="works-section">
-
       <div class="work work1">
         <img src="{{ url_for('static', filename='images/borders.png') }}" alt="">
         <span>Detect Borders</span>
@@ -68,18 +52,10 @@
         <img src="{{ url_for('static', filename='images/excel.png') }}" alt="">
         <span>Export the Table</span>
       </div>
-
     </div>
-
-
-    <!-- <img src="{{ url_for('static', filename='images/digital-marketing.gif') }}">
-    <p>
-      
-    </p> -->
   </div>
 
   <div id="last">
-
     <!-- animation -->
     <img id="call" src="{{ url_for('static', filename='images/contact-us.gif') }}">
     <div>
@@ -90,19 +66,8 @@
         nikheel indanoor<br>
       </p>
     </div>
-
   </div>
-  </main>
 
-
-
-  <script>
-    function onClickMenu() {
-      document.getElementById("menu").classList.toggle("change");
-      document.getElementById("nav").classList.toggle("change");
-      document.getElementById("menu-bg").classList.toggle("change-bg");
-    }
-  </script>
 </body>
 
 </html>

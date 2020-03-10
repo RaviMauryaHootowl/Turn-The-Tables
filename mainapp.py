@@ -56,8 +56,7 @@ def imageToTable(name):
         img, 50, 50, 50, 50, cv2.BORDER_CONSTANT, value=[255, 255])
     img123 = img1.copy()
     # # Thresholding the image
-    (thresh, th3) = cv2.threshold(img1, 128,
-                                  255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+    (thresh, th3) = cv2.threshold(img1, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
     # to flip image pixel values
     th3 = 255 - th3
     ver = np.array([[1],

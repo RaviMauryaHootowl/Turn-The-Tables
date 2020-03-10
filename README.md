@@ -1,6 +1,6 @@
 # Turn-The-Tables
 
-A Data Extration Web App that converts Images to Tables. <br>
+A Data Extraction Web App that converts Images to Tables. <br>
 The Exported Table could be downloaded in xlsx or csv format.
 
 ## Demo
