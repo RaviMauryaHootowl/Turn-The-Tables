@@ -15,29 +15,14 @@
 <body>
 
   <nav>
-    <div class="main">
-      <div class="left">
-        <span><a href="{{ url_for('landing') }}"><span id="title">Turn-the-Tables</span></a></span>
-      </div>
-      <div class="right">
-
-        <div id="menu-bar">
-          <div id="menu" onclick="onClickMenu()">
-            <div id="bar1" class="bar"></div>
-            <div id="bar2" class="bar"></div>
-            <div id="bar3" class="bar"></div>
-          </div>
-          <ul class="nav" id="nav">
-            <li><a onClick="{{ url_for('landing') }}">How It Works?</a></li>
-            <li><a onClick="{{ url_for('landing') }}">Contact Us</a></li>
-
-        </div>
-        <div class="menu-bg" id="menu-bg"></div>
-        </li>
-
-        </ul>
-      </div>
+    <div class="logo">
+      <span id="title"><a href="{{ url_for('landing') }}">Turn-the-Tables</a></span>
     </div>
+
+    <ul class="nav-links">
+      <li><a href="{{ url_for('landing') }}">How It Works?</a></li>
+      <li><a onClick="document.getElementById('last').scrollIntoView();">Contact Us</a></li>
+    </ul>
   </nav>
 
   <main>
